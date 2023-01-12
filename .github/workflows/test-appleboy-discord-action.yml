@@ -13,10 +13,11 @@ jobs:
       - name: Grep message
         run: echo "MESSAGE=$(grep \"This\" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV
       - name: Sending message 1
-        uses: fateyan/action-discord-notifier@v1
+        uses: stegzilla/discord-notify@v2
         with:
-          message-title: Test message 1
-          webhook: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          title: Test message 1
+          message: "This is a test message."
+          webhook_url: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
       - name: Sending message 2
         if: success()
         uses: appleboy/discord-action@master
