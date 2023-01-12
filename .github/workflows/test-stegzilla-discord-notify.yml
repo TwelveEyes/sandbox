@@ -22,5 +22,5 @@ jobs:
         uses: stegzilla/discord-notify@v2
         with:
           title: Test message 2
-          message: "**${{ env.MESSAGE }}**"
+          message: ${{ env.MESSAGE }}
           webhook_url: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
