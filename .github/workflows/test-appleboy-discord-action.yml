@@ -1,0 +1,21 @@
+name: Test appleboy/discord-action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run_main:
+    name: Send message using appleboy/discord-action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write message to workspace
+        run: echo "This is a test message." > $GITHUB_WORKSPACE/output.txt
+      - name: Grep message
+        run: echo "MESSAGE=$(grep \"This\" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV
+      - name: Sending message
+        if: success()
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          message: ${{ env.MESSAGE }}
