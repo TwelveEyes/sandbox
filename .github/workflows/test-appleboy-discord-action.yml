@@ -15,6 +15,8 @@ jobs:
       - name: Sending message 1
         uses: appleboy/discord-action@master
         with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           message: Test message 1
       - name: Sending message 2
         if: success()
