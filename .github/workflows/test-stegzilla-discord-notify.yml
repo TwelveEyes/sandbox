@@ -1,4 +1,4 @@
-name: Test appleboy/discord-action
+name: Test stegzilla/discord-notify
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ jobs:
       - name: Write message to workspace
         run: echo "This is a test message." > $GITHUB_WORKSPACE/output.txt
       - name: Grep message
-        run: echo "MESSAGE=$(grep \"This\" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV
+        run: echo "MESSAGE=$(grep "This" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV
       - name: Sending message 1
         uses: stegzilla/discord-notify@v2
         with:
@@ -19,9 +19,8 @@ jobs:
           message: "This is a test message."
           webhook_url: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
       - name: Sending message 2
-        if: success()
-        uses: appleboy/discord-action@master
+        uses: stegzilla/discord-notify@v2
         with:
-          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
-          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
-          message: ${{ env.MESSAGE }}
+          title: Test message 2
+          message: "**${{ env.MESSAGE }}**"
+          webhook_url: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
