@@ -5,7 +5,7 @@ on:
 
 jobs:
   run_main:
-    name: Send message using appleboy/discord-action
+    name: Send message using stegzilla/discord-notify
     runs-on: ubuntu-latest
     steps:
       - name: Write message to workspace
