@@ -11,7 +11,7 @@ jobs:
       - name: Write message to workspace
         run: echo "This is a test message." > $GITHUB_WORKSPACE/output.txt
       - name: Grep message
-        run: echo "MESSAGE=$(grep \"This\" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV
+        run: echo "MESSAGE=$(grep \"This\" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV && echo ${{ env.MESSAGE }}
       - name: Sending message
         if: success()
         uses: appleboy/discord-action@master
