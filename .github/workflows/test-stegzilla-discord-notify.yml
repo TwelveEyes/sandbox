@@ -26,3 +26,10 @@ jobs:
             ${{ env.MESSAGE }}
             ${{ env.MESSAGE }}
           webhook_url: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+      - name: Sending message 3
+        if: ${{ env.TEST == true }}
+        uses: stegzilla/discord-notify@v2
+        with:
+          title: Test message 3
+          message: "This is a conditional test message"
+          webhook_url: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
