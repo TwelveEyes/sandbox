@@ -11,7 +11,7 @@ jobs:
       - name: Write message to workspace
         run: echo "This is a test message." > $GITHUB_WORKSPACE/output.txt
       - name: Grep message
-        run: echo "MESSAGE=$(grep "This" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV
+        run: echo "MESSAGE=$(grep "This" $GITHUB_WORKSPACE/output.txt)" >> $GITHUB_ENV && echo "LINKS_EXIST=YES" >> $GITHUB_ENV
       - name: Sending message 1
         uses: stegzilla/discord-notify@v2
         with:
@@ -27,7 +27,7 @@ jobs:
             ${{ env.MESSAGE }}
           webhook_url: https://discordapp.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
       - name: Sending message 3
-        if: ${{ env.TEST == true }}
+        if: env.LINKS_EXIST == 'YES'
         uses: stegzilla/discord-notify@v2
         with:
           title: Test message 3
